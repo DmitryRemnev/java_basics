@@ -8,7 +8,7 @@ public class Cat {
 
     private double foodEaten;
 
-    private static int count;
+    private static int count = 0;
 
     public Cat() {
         weight = 1500.0 + 3000.0 * Math.random();
@@ -24,13 +24,13 @@ public class Cat {
     }
 
     public void pee() {
-        if (isDead()) {
-            System.out.println("Невозможно выполнить действие - кошка мертва.");
-        } else {
+        if (isCatAlive()) {
             weight = weight - 40.0;
             System.out.println("Сходили в туалет");
-            minusCat(isDead());
+        } else {
+            System.out.println("Невозможно выполнить действие.");
         }
+        minusCatIfItIsDead();
     }
 
     public double getFoodEaten() {
@@ -46,51 +46,47 @@ public class Cat {
     }
 
     public void meow() {
-        if (isDead()) {
-            System.out.println("Невозможно выполнить действие - кошка мертва.");
-        } else {
+        if (isCatAlive()) {
             weight = weight - 1;
             System.out.println("Meow");
-            minusCat(isDead());
+        } else {
+            System.out.println("Невозможно выполнить действие.");
         }
+        minusCatIfItIsDead();
     }
 
     public void feed(Double amount) {
-        if (isExploded()) {
-            System.out.println("Невозможно выполнить действие - кошка взорвалась.");
-        } else {
+        if (isCatAlive()) {
             weight = weight + amount;
             foodEaten = foodEaten + amount;
-            minusCat(isExploded());
+        } else {
+            System.out.println("Невозможно выполнить действие.");
         }
+        minusCatIfItIsDead();
     }
 
     public void drink(Double amount) {
-        if (isExploded()) {
-            System.out.println("Невозможно выполнить действие - кошка взорвалась.");
-        } else {
+        if (isCatAlive()) {
             weight = weight + amount;
             foodEaten = foodEaten + amount;
-            minusCat(isExploded());
+        } else {
+            System.out.println("Невозможно выполнить действие.");
         }
+        minusCatIfItIsDead();
     }
 
-    private void minusCat(boolean event) {
-        if (event) {
+    private boolean isCatAlive() {
+        return (weight >= minWeight && weight <= maxWeight);
+    }
+
+    private void minusCatIfItIsDead() {
+        if (!isCatAlive()) {
             count--;
         }
     }
 
     public Double getWeight() {
         return weight;
-    }
-
-    private boolean isDead() {
-        return weight < minWeight;
-    }
-
-    private boolean isExploded() {
-        return weight > maxWeight;
     }
 
     public String getStatus() {
