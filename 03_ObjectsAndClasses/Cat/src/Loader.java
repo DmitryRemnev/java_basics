@@ -3,7 +3,7 @@ public class Loader {
 
     public static void main(String[] args) {
 
-        // 1.Выведите в консоль вес созданных кошек.
+        /*// 1.Выведите в консоль вес созданных кошек.
         Cat cat = new Cat();
         System.out.println("Вес первого кота: " + cat.getWeight());
 
@@ -44,6 +44,14 @@ public class Loader {
         while (cat2.getWeight() >= cat2.getMinWeight()) {
             cat2.meow();
         }
-        System.out.println("Статус второго кота: " + cat2.getStatus());
+        System.out.println("Статус второго кота: " + cat2.getStatus());*/
+
+        Cat cat = new Cat();
+        cat.feed(150.0);
+        cat.drink(100.0);
+        cat.pee();
+        cat.pee();
+        cat.pee();
+        System.out.println("Суммарный вес съеденный кошкой: " + cat.getFoodEaten() + " граммов");
     }
 }
