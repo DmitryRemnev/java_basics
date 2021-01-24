@@ -1,21 +1,19 @@
 
 public class Cat {
-    private double originWeight;
-    private double weight;
 
-    private double minWeight;
-    private double maxWeight;
-
-    private double foodEaten;
+    public static final int NUMBER_OF_EYES = 2;
+    public static final double MIN_WEIGHT = 1000.0;
+    public static final double MAX_WEIGHT = 9000.0;
 
     private static int count = 0;
+
+    private double originWeight;
+    private double weight;
+    private double foodEaten;
 
     public Cat() {
         weight = 1500.0 + 3000.0 * Math.random();
         originWeight = weight;
-        minWeight = 1000.0;
-        maxWeight = 9000.0;
-
         count++;
     }
 
@@ -35,14 +33,6 @@ public class Cat {
 
     public double getFoodEaten() {
         return foodEaten;
-    }
-
-    public double getMaxWeight() {
-        return maxWeight;
-    }
-
-    public double getMinWeight() {
-        return minWeight;
     }
 
     public void meow() {
@@ -76,7 +66,7 @@ public class Cat {
     }
 
     private boolean isCatAlive() {
-        return (weight >= minWeight && weight <= maxWeight);
+        return (weight >= MIN_WEIGHT && weight <= MAX_WEIGHT);
     }
 
     private void minusCatIfItIsDead() {
@@ -90,9 +80,9 @@ public class Cat {
     }
 
     public String getStatus() {
-        if (weight < minWeight) {
+        if (weight < MIN_WEIGHT) {
             return "Dead";
-        } else if (weight > maxWeight) {
+        } else if (weight > MAX_WEIGHT) {
             return "Exploded";
         } else if (weight > originWeight) {
             return "Sleeping";
