@@ -10,6 +10,15 @@ public class Cat {
     private double originWeight;
     private double weight;
     private double foodEaten;
+    private String color;
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 
     public Cat() {
         weight = 1500.0 + 3000.0 * Math.random();
