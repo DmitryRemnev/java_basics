@@ -12,6 +12,23 @@ public class Cat {
     private double foodEaten;
     private CatColors color;
 
+    public Cat() {
+        weight = 1500.0 + 3000.0 * Math.random();
+        originWeight = weight;
+        count++;
+    }
+
+    public static Cat copy(Cat original) {
+        Cat copyCat = new Cat();
+
+        copyCat.setWeight(original.getWeight());
+        copyCat.setOriginWeight(original.getOriginWeight());
+        copyCat.setFoodEaten(original.getFoodEaten());
+        copyCat.setColor(original.getColor());
+
+        return copyCat;
+    }
+
     public CatColors getColor() {
         return color;
     }
@@ -20,16 +37,12 @@ public class Cat {
         this.color = color;
     }
 
-    public Cat() {
-        weight = 1500.0 + 3000.0 * Math.random();
-        originWeight = weight;
-        count++;
+    public double getOriginWeight() {
+        return originWeight;
     }
 
-    public Cat(double weight) {
-        this();
-        this.weight = weight;
-        originWeight = weight;
+    public void setOriginWeight(double originWeight) {
+        this.originWeight = originWeight;
     }
 
     public static int getCount() {
@@ -44,6 +57,10 @@ public class Cat {
             System.out.println("Невозможно выполнить действие.");
         }
         minusCatIfItIsDead();
+    }
+
+    public void setFoodEaten(double foodEaten) {
+        this.foodEaten = foodEaten;
     }
 
     public double getFoodEaten() {
@@ -88,6 +105,10 @@ public class Cat {
         if (!isCatAlive()) {
             count--;
         }
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
     }
 
     public Double getWeight() {
