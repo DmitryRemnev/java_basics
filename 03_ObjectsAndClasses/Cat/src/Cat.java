@@ -10,13 +10,13 @@ public class Cat {
     private double originWeight;
     private double weight;
     private double foodEaten;
-    private Enum<CatColors> color;
+    private CatColors color;
 
-    public Enum<CatColors> getColor() {
+    public CatColors getColor() {
         return color;
     }
 
-    public void setColor(Enum<CatColors> color) {
+    public void setColor(CatColors color) {
         this.color = color;
     }
 

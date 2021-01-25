@@ -3,17 +3,11 @@ public class Loader {
 
     public static void main(String[] args) {
 
-        Cat cat = getKitten();
-        System.out.println("Вес первого котёнка: " + cat.getWeight());
-        cat.setColor(CatColors.BLACK);
+        Cat cat = new Cat();
+        System.out.println("Вес первого кота: " + cat.getWeight());
 
-        Cat cat2 = getKitten();
-        System.out.println("Вес второго котёнка: " + cat2.getWeight());
-        cat2.setColor(CatColors.GRAY);
-
-        Cat cat3 = getKitten();
-        System.out.println("Вес третьего котёнка: " + cat3.getWeight());
-        cat3.setColor(CatColors.WHITE);
+        Cat cat2 = new Cat(cat.getWeight());
+        System.out.println("Вес второго кота: " + cat2.getWeight());
     }
 
     private static Cat getKitten() {
