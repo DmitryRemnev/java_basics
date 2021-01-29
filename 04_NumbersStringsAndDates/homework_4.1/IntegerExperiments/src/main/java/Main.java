@@ -27,7 +27,7 @@ public class Main {
             int result = 0;
             for (int i = 0; i < numberString.length(); i++) {
                 char c = numberString.charAt(i);
-                int x = Integer.parseInt(String.valueOf(c));
+                int x = Character.getNumericValue(c);
                 result = result + x;
             }
             return result;
