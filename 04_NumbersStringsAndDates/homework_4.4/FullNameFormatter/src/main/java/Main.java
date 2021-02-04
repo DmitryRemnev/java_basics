@@ -3,12 +3,12 @@ import java.util.Scanner;
 public class Main {
 
     public static final String VALID_CHARACTERS = " -АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯабвгдеёжзийклмнопрстуфхцчшщьыъэюя";
-    private static int numOfString = 1;
 
     public static void main(String[] args) {
         String surname = "";
         String name = "";
         String patronymic = "";
+        int numOfString = 1;
         boolean isAddToString = false;
         boolean isValidationSuccessful = true;
         char c;
