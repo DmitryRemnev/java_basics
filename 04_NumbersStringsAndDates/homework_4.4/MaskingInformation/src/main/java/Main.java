@@ -1,6 +1,5 @@
 public class Main {
     private static Integer firstIndex;
-    private static Integer secondIndex;
 
     public static void main(String[] args) {
 
@@ -9,6 +8,7 @@ public class Main {
     }
 
     public static String searchAndReplaceDiamonds(String text, String placeholder) {
+        boolean beginReplacement = false;
 
         if (text.length() > 0) {
 
@@ -16,14 +16,13 @@ public class Main {
 
                 if (text.charAt(i) == '<') {
                     firstIndex = i;
+                    beginReplacement = true;
                 }
-                if (text.charAt(i) == '>') {
-                    secondIndex = i;
-                }
-            }
 
-            if ((firstIndex != null) && (secondIndex != null)) {
-                text = text.substring(0, firstIndex) + placeholder + text.substring(secondIndex + 1);
+                if (text.charAt(i) == '>' && beginReplacement) {
+                    text = text.substring(0, firstIndex) + placeholder + text.substring(i + 1);
+                    beginReplacement = false;
+                }
             }
         }
 
