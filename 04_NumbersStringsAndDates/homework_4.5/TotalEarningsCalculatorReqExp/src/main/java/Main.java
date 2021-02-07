@@ -1,12 +1,43 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Main {
 
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-  }
+        String text = "Вася заработал 5000 рублей, Петя - 7563 рубля, а Маша - 30000 рублей";
+        int sum = calculateSalarySum(text);
 
-  public static int calculateSalarySum(String text){
-    //TODO: реализуйте метод
-    return -1;
-  }
+        if (sum > 0) {
+            System.out.println(sum);
+        } else {
+            System.out.println("Никто ничего не заработал");
+        }
+    }
 
+    public static int calculateSalarySum(String text) {
+
+        Pattern pattern = Pattern.compile("\\d");
+        String sumString = "";
+        boolean isAddToSum = false;
+        int sumInt = 0;
+
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            Matcher matcher = pattern.matcher(Character.toString(c));
+
+            if (isAddToSum && c == ' ') {
+                sumInt += Integer.parseInt(sumString);
+                sumString = "";
+                isAddToSum = false;
+            }
+
+            if (matcher.find()) {
+                isAddToSum = true;
+                sumString += c;
+            }
+        }
+
+        return sumInt;
+    }
 }
