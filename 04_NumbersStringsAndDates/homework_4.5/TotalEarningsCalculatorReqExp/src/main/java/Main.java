@@ -2,6 +2,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
+    public static final Pattern PATTERN = Pattern.compile("\\d");
 
     public static void main(String[] args) {
 
@@ -17,24 +18,25 @@ public class Main {
 
     public static int calculateSalarySum(String text) {
 
-        Pattern pattern = Pattern.compile("\\d");
-        String sumString = "";
+        StringBuilder builder = new StringBuilder();
+        String sumString;
         boolean isAddToSum = false;
         int sumInt = 0;
 
         for (int i = 0; i < text.length(); i++) {
             char c = text.charAt(i);
-            Matcher matcher = pattern.matcher(Character.toString(c));
+            Matcher matcher = PATTERN.matcher(Character.toString(c));
 
             if (isAddToSum && c == ' ') {
+                sumString = builder.toString();
                 sumInt += Integer.parseInt(sumString);
-                sumString = "";
+                builder.setLength(0);
                 isAddToSum = false;
             }
 
             if (matcher.find()) {
+                builder.append(c);
                 isAddToSum = true;
-                sumString += c;
             }
         }
 
