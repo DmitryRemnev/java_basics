@@ -1,4 +1,10 @@
+import java.util.regex.Pattern;
+
 public class Main {
+    public static final Pattern CLEAR_PATTERN = Pattern.compile("[\\p{Punct}\\d]");
+    public static final Pattern SPACE_PATTERN = Pattern.compile("\\s+");
+    public static final String SPACE = " ";
+    public static final String LINE_BREAK = "\n";
 
     public static void main(String[] args) {
         System.out.println(splitTextIntoWords("a b c"));
@@ -6,8 +12,7 @@ public class Main {
 
     public static String splitTextIntoWords(String text) {
 
-        String clean = text.replaceAll("[^A-Za-z\\s-’]", "");
-        String cleanDash = clean.replaceAll("-", " ");
-        return cleanDash.replaceAll("( )+", "\n");
+        String clearString = text.replaceAll(String.valueOf(CLEAR_PATTERN), SPACE);
+        return clearString.replaceAll(String.valueOf(SPACE_PATTERN), LINE_BREAK).trim();
     }
 }
