@@ -12,7 +12,6 @@ public class Main {
 
     public static String splitTextIntoWords(String text) {
 
-        String clearString = text.replaceAll(String.valueOf(CLEAR_PATTERN), SPACE);
-        return clearString.replaceAll(String.valueOf(SPACE_PATTERN), LINE_BREAK).trim();
+        return text.replaceAll(String.valueOf(CLEAR_PATTERN), SPACE).replaceAll(String.valueOf(SPACE_PATTERN), LINE_BREAK).trim();
     }
 }
