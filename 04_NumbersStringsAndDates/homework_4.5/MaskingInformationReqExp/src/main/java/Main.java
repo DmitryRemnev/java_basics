@@ -1,7 +1,5 @@
-import java.util.regex.Pattern;
-
 public class Main {
-    public static final Pattern PATTERN = Pattern.compile("<.+?>");
+    public static final String REGEX_REPLACE_DIAMONDS = "<.+?>";
 
     public static void main(String[] args) {
         String safe = searchAndReplaceDiamonds("Номер кредитной карты <4008 1234 5678> 8912", "***");
@@ -9,6 +7,6 @@ public class Main {
     }
 
     public static String searchAndReplaceDiamonds(String text, String placeholder) {
-        return text.replaceAll(PATTERN.toString(), placeholder);
+        return text.replaceAll(REGEX_REPLACE_DIAMONDS, placeholder);
     }
 }
