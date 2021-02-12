@@ -1,13 +1,9 @@
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class Main {
+    public static final String DATE_PATTERN = "dd.MM.yyyy - E";
 
     public static void main(String[] args) {
 
@@ -19,24 +15,17 @@ public class Main {
     }
 
     public static String collectBirthdays(int year, int month, int day) {
-
-        Date date = new Date();
-        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        int age = localDate.getYear() - year;
-
-        Calendar dateOfBirth = new GregorianCalendar(year, month - 1, day);
-        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy - E", Locale.US);
         String text = "";
-        boolean isEnteredDateLessThanCurrent = dateOfBirth.compareTo(Calendar.getInstance()) < 0;
+        LocalDate birthday = LocalDate.of(year, month, day);
+        LocalDate today = LocalDate.now();
+        DateTimeFormatter printFormat = DateTimeFormatter.ofPattern(DATE_PATTERN, new Locale("en"));
+        StringBuilder builder = new StringBuilder();
+        int i = 0;
 
-        if (isEnteredDateLessThanCurrent) {
-            int i = 0;
-            do {
-                Date nextDate = dateOfBirth.getTime();
-                text = text + i + " - " + dateFormat.format(nextDate) + System.lineSeparator();
-                dateOfBirth.add(Calendar.YEAR, 1);
-                i++;
-            } while (i < age);
+        while (today.isAfter(birthday) || today.isEqual(birthday)) {
+            text = builder.append(i).append(" - ").append(birthday.format(printFormat)).append(System.lineSeparator()).toString();
+            birthday = birthday.plusYears(1);
+            i++;
         }
 
         return text;
