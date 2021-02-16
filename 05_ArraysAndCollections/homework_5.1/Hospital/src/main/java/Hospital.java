@@ -34,7 +34,8 @@ public class Hospital {
         builder.append("Температуры пациентов: ");
 
         for (float item : temperatureData) {
-            builder.append(round(item, 1)).append(" ");
+            String format = String.format("%.1f", item);
+            builder.append(format).append(" ");
         }
     }
 
@@ -46,7 +47,8 @@ public class Hospital {
         }
         float averageTemperature = sum / getPatientsCount();
 
-        builder.append("\nСредняя температура: ").append(round(averageTemperature, 2));
+        String format = String.format("%.2f", averageTemperature);
+        builder.append("\nСредняя температура: ").append(format);
     }
 
     public static void countNumberHealthyPatients(StringBuilder builder, float[] temperatureData) {
@@ -60,13 +62,6 @@ public class Hospital {
 
         builder.append("\nКоличество здоровых: ");
         builder.append(numberHealthyPatients);
-    }
-
-    public static float round(float value, int numberCharacters) {
-        double scale = Math.pow(10, numberCharacters);
-        double result = Math.ceil(value * scale) / scale;
-
-        return (float) result;
     }
 
     public static int getPatientsCount() {
