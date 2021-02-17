@@ -1,5 +1,13 @@
 public class Main {
+
     public static void main(String[] args) {
-        //Распечатайте сгенерированный в классе TwoDimensionalArray.java двумерный массив
+        char[][] xArray = TwoDimensionalArray.getTwoDimensionalArray(9);
+
+        for (char[] chars : xArray) {
+            for (char aChar : chars) {
+                System.out.print(aChar);
+            }
+            System.out.println();
+        }
     }
 }
