@@ -37,6 +37,8 @@ public class Hospital {
             String format = String.format("%.1f", item);
             builder.append(format).append(" ");
         }
+
+        builder.deleteCharAt(builder.length() - 1);
     }
 
     public static void calculateArithmeticMeanValueTemperature(StringBuilder builder, float[] temperatureData) {
