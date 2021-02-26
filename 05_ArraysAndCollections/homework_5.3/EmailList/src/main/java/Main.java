@@ -1,29 +1,24 @@
-import java.util.Scanner;
-
 public class Main {
+
     public static final String LIST_COMMAND = "LIST";
     public static final String ADD_COMMAND = "ADD";
-    private static final EmailList emailList = new EmailList();
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        EmailList emailList = new EmailList();
 
         while (true) {
-            String input = scanner.nextLine();
+
+            String input = UserInput.getLine();
+
             if (input.equals("0")) {
                 break;
             }
 
-            if (input.contains(LIST_COMMAND)) {
+            if (input.equals(ADD_COMMAND)) {
+                emailList.add(input.replaceFirst(ADD_COMMAND, "").trim());
 
-                for (String item : emailList.getSortedEmails()) {
-                    System.out.println(item);
-                }
-
-            } else if (input.contains(ADD_COMMAND)) {
-
-                input = input.replace(ADD_COMMAND, "").trim();
-                emailList.add(input);
+            } else if (input.startsWith(LIST_COMMAND)) {
+                emailList.printList();
 
             } else {
                 System.out.println("Введите команду!");

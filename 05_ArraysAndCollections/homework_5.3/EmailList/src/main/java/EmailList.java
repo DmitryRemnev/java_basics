@@ -23,6 +23,12 @@ public class EmailList {
         return new ArrayList<>(set);
     }
 
+    public void printList() {
+        for (String item : set) {
+            System.out.println(item);
+        }
+    }
+
     private boolean isMailValid(String email) {
         Pattern pattern = Pattern.compile(EMAIL_PATTERN);
         Matcher matcher = pattern.matcher(email);
