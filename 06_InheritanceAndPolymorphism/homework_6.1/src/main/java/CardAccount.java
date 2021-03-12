@@ -5,8 +5,8 @@ public class CardAccount extends BankAccount {
     @Override
     public void take(double amountToTake) {
 
-        if (amountToTake <= amount) {
-            amount -= (amountToTake * ONE_PERCENT);
+        if (super.canTake(amountToTake * ONE_PERCENT)) {
+            super.take(amountToTake * ONE_PERCENT);
         }
     }
 }

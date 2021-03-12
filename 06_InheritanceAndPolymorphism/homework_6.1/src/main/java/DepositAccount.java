@@ -4,10 +4,11 @@ public class DepositAccount extends BankAccount {
 
     LocalDate lastIncome;
 
+    @Override
     public void put(double amountToPut) {
 
-        if (amountToPut >= 0) {
-            amount += amountToPut;
+        if (super.canPut(amountToPut)) {
+            super.put(amountToPut);
             lastIncome = LocalDate.now();
         }
     }
@@ -15,16 +16,17 @@ public class DepositAccount extends BankAccount {
     @Override
     public void take(double amountToTake) {
 
-        LocalDate now = LocalDate.now();
-
-        if (hasMonthPassed(now)) {
-            if (amountToTake <= amount) {
-                amount -= amountToTake;
-            }
+        if (canTake(amountToTake)) {
+            super.take(amountToTake);
         }
     }
 
-    private boolean hasMonthPassed(LocalDate now) {
-        return now.isAfter(lastIncome.plusMonths(1));
+    @Override
+    public boolean canTake(double amountToTake) {
+        return super.canTake(amountToTake) && hasMonthPassed();
+    }
+
+    private boolean hasMonthPassed() {
+        return LocalDate.now().isAfter(lastIncome.plusMonths(1));
     }
 }
