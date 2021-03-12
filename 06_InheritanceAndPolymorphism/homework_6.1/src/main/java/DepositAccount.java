@@ -2,10 +2,10 @@ import java.time.LocalDate;
 
 public class DepositAccount extends BankAccount {
 
-    LocalDate lastIncome;
+    private LocalDate lastIncome;
 
     @Override
-    public void put(double amountToPut) {
+    protected void put(double amountToPut) {
 
         if (super.canPut(amountToPut)) {
             super.put(amountToPut);
@@ -14,7 +14,7 @@ public class DepositAccount extends BankAccount {
     }
 
     @Override
-    public void take(double amountToTake) {
+    protected void take(double amountToTake) {
 
         if (canTake(amountToTake)) {
             super.take(amountToTake);
@@ -22,7 +22,7 @@ public class DepositAccount extends BankAccount {
     }
 
     @Override
-    public boolean canTake(double amountToTake) {
+    protected boolean canTake(double amountToTake) {
         return super.canTake(amountToTake) && hasMonthPassed();
     }
 

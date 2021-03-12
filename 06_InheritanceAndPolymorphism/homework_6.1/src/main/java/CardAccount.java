@@ -1,9 +1,9 @@
 public class CardAccount extends BankAccount {
 
-    public static final double ONE_PERCENT = 1.01;
+    private static final double ONE_PERCENT = 1.01;
 
     @Override
-    public void take(double amountToTake) {
+    protected void take(double amountToTake) {
 
         if (super.canTake(amountToTake * ONE_PERCENT)) {
             super.take(amountToTake * ONE_PERCENT);
