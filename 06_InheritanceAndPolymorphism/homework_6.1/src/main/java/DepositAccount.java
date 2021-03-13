@@ -5,7 +5,7 @@ public class DepositAccount extends BankAccount {
     private LocalDate lastIncome;
 
     @Override
-    protected void put(double amountToPut) {
+    public void put(double amountToPut) {
 
         if (super.canPut(amountToPut)) {
             super.put(amountToPut);
@@ -14,7 +14,7 @@ public class DepositAccount extends BankAccount {
     }
 
     @Override
-    protected void take(double amountToTake) {
+    public void take(double amountToTake) {
 
         if (canTake(amountToTake)) {
             super.take(amountToTake);

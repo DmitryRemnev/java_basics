@@ -6,21 +6,21 @@ public class BankAccount {
         return amount;
     }
 
-    protected void put(double amountToPut) {
+    public void put(double amountToPut) {
 
         if (canPut(amountToPut)) {
             amount += amountToPut;
         }
     }
 
-    protected void take(double amountToTake) {
+    public void take(double amountToTake) {
 
         if (canTake(amountToTake)) {
             amount -= amountToTake;
         }
     }
 
-    protected boolean send(BankAccount receiver, double amount) {
+    public boolean send(BankAccount receiver, double amount) {
 
         if (canTake(amount) && receiver.canPut(amount)) {
             take(amount);
