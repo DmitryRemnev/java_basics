@@ -1,6 +1,8 @@
 public abstract class Client {
     protected double amount;
 
+    public abstract String getInfo();
+
     public double getAmount() {
         return amount;
     }
