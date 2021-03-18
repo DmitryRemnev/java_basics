@@ -1,4 +1,4 @@
-import Entities.Employee;
+import entities.Employee;
 
 public class Main {
     public static final String RUB_ENDING = " руб.";

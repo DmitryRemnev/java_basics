@@ -1,6 +1,6 @@
-package Comparators;
+package comparators;
 
-import Entities.Employee;
+import entities.Employee;
 
 import java.util.Comparator;
 

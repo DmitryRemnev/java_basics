@@ -1,9 +1,9 @@
-import Comparators.LowestComparator;
-import Comparators.TopComparator;
-import Entities.Employee;
-import Entities.Manager;
-import Entities.Operator;
-import Entities.TopManager;
+import comparators.LowestComparator;
+import comparators.TopComparator;
+import entities.Employee;
+import entities.Manager;
+import entities.Operator;
+import entities.TopManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
