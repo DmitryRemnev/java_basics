@@ -1,4 +1,12 @@
+import Comparators.LowestComparator;
+import Comparators.TopComparator;
+import Entities.Employee;
+import Entities.Manager;
+import Entities.Operator;
+import Entities.TopManager;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Company {
@@ -57,9 +65,11 @@ public class Company {
             for (int i = 0; i < count; i++) {
                 list.add(employees.get(i));
             }
-        }
+            return list;
 
-        return list;
+        } else {
+            return Collections.EMPTY_LIST;
+        }
     }
 
     List<Employee> getLowestSalaryStaff(int count) {
@@ -71,9 +81,11 @@ public class Company {
             for (int i = 0; i < count; i++) {
                 list.add(employees.get(i));
             }
-        }
+            return list;
 
-        return list;
+        } else {
+            return Collections.EMPTY_LIST;
+        }
     }
 
     private boolean isValidCount(int count) {

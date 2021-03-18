@@ -1,3 +1,5 @@
+package Entities;
+
 public class TopManager implements Employee {
 
     private static final int GOOD_COMPANY_INCOME = 10_000_000;

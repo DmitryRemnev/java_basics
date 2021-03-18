@@ -1,3 +1,5 @@
+package Entities;
+
 public class Operator implements Employee {
 
     public static final int OPERATOR_SALARY = 30_000;

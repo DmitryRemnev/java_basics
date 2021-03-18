@@ -1,3 +1,5 @@
+package Entities;
+
 public class Manager implements Employee {
 
     private static final int FIXED_PART = 50_000;
