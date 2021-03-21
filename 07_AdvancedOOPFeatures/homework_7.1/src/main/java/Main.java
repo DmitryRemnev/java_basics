@@ -6,10 +6,23 @@ public class Main {
 
     public static void main(String[] args) {
         List<Employee> staff = Employee.loadStaffFromFile(STAFF_TXT);
-        System.out.println(staff);
+
+        sortBySalaryAndAlphabet(staff);
+
+        for (Employee item : staff) {
+            System.out.println(item.toString());
+        }
     }
 
     public static void sortBySalaryAndAlphabet(List<Employee> staff) {
-        //TODO Метод должен отсортировать сотрудников по заработной плате и алфавиту.
+        staff.sort((o1, o2) -> {
+            if (o1.getSalary() > o2.getSalary()) {
+                return 1;
+            } else if (o1.getSalary() < o2.getSalary()) {
+                return -1;
+            } else {
+                return o1.toString().compareTo(o2.getName());
+            }
+        });
     }
 }
