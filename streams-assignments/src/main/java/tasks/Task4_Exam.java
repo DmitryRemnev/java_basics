@@ -1,5 +1,6 @@
 package tasks;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -36,14 +37,11 @@ public class Task4_Exam {
      * @return
      */
     public static TruckType getTypeByWeight(int weight) {
-        if (weight > 0 && weight <= 2_000) {
-            return TruckType.Pickup;
-        } else if (weight > 2_000 && weight <= 12_000) {
-            return TruckType.SmallBoxTruck;
-        } else if (weight > 12_000 && weight <= 20_000) {
-            return TruckType.SemiTrailer;
-        }
-        throw new WeightTooHighException();
+        return Arrays.stream(TruckType.values())
+                .filter(elm -> elm.canHandleWeight(weight))
+                .sorted()
+                .findFirst()
+                .orElseThrow(WeightTooHighException::new);
     }
 
     /**
