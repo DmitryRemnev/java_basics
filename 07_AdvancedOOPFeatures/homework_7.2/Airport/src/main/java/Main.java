@@ -1,12 +1,14 @@
 import com.skillbox.airport.Airport;
 import com.skillbox.airport.Flight;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Main {
-    public static final long TWO_HOURS_IN_MILLISECONDS = 7_200_000;
+    public static final long TWO_HOURS = 2;
 
     public static void main(String[] args) {
 
@@ -30,9 +32,11 @@ public class Main {
     }
 
     public static boolean isRightTime(Date date) {
-        long flightTime = date.getTime();
-        long currentTime = System.currentTimeMillis();
+        LocalDateTime departureTime = date
+                .toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
 
-        return flightTime - currentTime < TWO_HOURS_IN_MILLISECONDS;
+        return departureTime.isAfter(LocalDateTime.now()) && departureTime.isBefore(LocalDateTime.now().plusHours(TWO_HOURS));
     }
 }
