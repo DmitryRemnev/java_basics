@@ -1,4 +1,4 @@
 package exceptions;
 
-public class IncorrectMailException extends Exception {
+public class IncorrectMailException extends RuntimeException {
 }

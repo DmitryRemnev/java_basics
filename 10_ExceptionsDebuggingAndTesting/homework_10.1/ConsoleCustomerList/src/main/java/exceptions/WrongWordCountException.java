@@ -1,4 +1,4 @@
 package exceptions;
 
-public class WrongWordCountException extends Exception{
+public class WrongWordCountException extends RuntimeException{
 }

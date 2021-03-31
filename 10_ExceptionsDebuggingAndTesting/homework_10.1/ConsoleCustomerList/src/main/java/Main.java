@@ -12,6 +12,9 @@ public class Main {
     private static final String COMMAND_ERROR = "Wrong command! Available command examples: \n" +
             COMMAND_EXAMPLES;
     private static final String helpText = "Command examples:\n" + COMMAND_EXAMPLES;
+    private static final String WRONG_WORD_COUNT = "Неверное количество слов";
+    private static final String INCORRECT_MAILING_ADDRESS = "Некорректный почтовый адрес";
+    private static final String INVALID_PHONE_NUMBER = "Некорректный номер телефона";
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -25,11 +28,11 @@ public class Main {
                 try {
                     executor.addCustomer(tokens[1]);
                 } catch (WrongWordCountException exception) {
-                    System.out.println("Неверное количество слов");
+                    System.out.println(WRONG_WORD_COUNT);
                 } catch (IncorrectMailException exception) {
-                    System.out.println("Некорректный почтовый адрес");
+                    System.out.println(INCORRECT_MAILING_ADDRESS);
                 } catch (IncorrectPhoneException exception) {
-                    System.out.println("Некорректный номер телефона");
+                    System.out.println(INVALID_PHONE_NUMBER);
                 }
             } else if (tokens[0].equals("list")) {
                 executor.listCustomers();
