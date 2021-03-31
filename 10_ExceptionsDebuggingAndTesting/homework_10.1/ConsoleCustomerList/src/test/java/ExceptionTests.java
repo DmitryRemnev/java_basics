@@ -1,3 +1,6 @@
+import exceptions.IncorrectMailException;
+import exceptions.IncorrectPhoneException;
+import exceptions.WrongWordCountException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -60,7 +63,15 @@ public class ExceptionTests {
         final String phone = "+79991234567";
         final String input = String.join(" ", name, email, phone);
 
-        storage.addCustomer(input);
+        try {
+            storage.addCustomer(input);
+        } catch (WrongWordCountException exception) {
+            System.out.println("Неверное количество слов");
+        } catch (IncorrectMailException exception) {
+            System.out.println("Некорректный почтовый адрес");
+        } catch (IncorrectPhoneException exception) {
+            System.out.println("Некорректный номер телефона адрес");
+        }
         assertEquals(1, storage.getCount());
 
         Customer customer = storage.getCustomer(name);
