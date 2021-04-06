@@ -34,7 +34,7 @@ public class Main {
         }
     }
 
-    public static RouteCalculator getRouteCalculator() {
+    private static RouteCalculator getRouteCalculator() {
         createStationIndex();
         return new RouteCalculator(stationIndex);
     }
