@@ -27,15 +27,14 @@ public class Parsing {
     private void downloadImage(String src) {
         try {
             URL url = new URL(src);
-            InputStream in = url.openStream();
-            OutputStream out = new BufferedOutputStream(new FileOutputStream(FOLDER_PATH + getName(src)));
 
-            for (int b; (b = in.read()) != -1; ) {
-                out.write(b);
+            try (InputStream in = url.openStream();
+                 OutputStream out = new BufferedOutputStream(new FileOutputStream(FOLDER_PATH + getName(src)))) {
+
+                for (int b; (b = in.read()) != -1; ) {
+                    out.write(b);
+                }
             }
-
-            out.close();
-            in.close();
 
         } catch (Exception exception) {
             exception.printStackTrace();
