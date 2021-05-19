@@ -23,6 +23,5 @@
         <mapping class="entities.Teacher"></mapping>
         <mapping class="entities.Student"></mapping>
         <mapping class="entities.Subscription"></mapping>
-        <mapping class="entities.Key"></mapping>
     </session-factory>
 </hibernate-configuration>

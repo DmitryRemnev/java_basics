@@ -20,6 +20,7 @@ public class Student {
     private Date registrationDate;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "student_id")
     private List<Subscription> subscriptionList;
 
     public int getId() {

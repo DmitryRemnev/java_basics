@@ -1,11 +1,12 @@
 package entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.*;
 
 @Entity
 @Table(name = "Courses")
-public class Course {
+public class Course implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +26,7 @@ public class Course {
     private Teacher teacher;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "course")
     private List<Subscription> subscriptionList;
 
     @Column(name = "students_count")
@@ -34,12 +36,6 @@ public class Course {
 
     @Column(name = "price_per_hour")
     private float pricePerHour;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "Subscriptions",
-            joinColumns = {@JoinColumn(name = "course_id", insertable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "student_id", insertable = false, updatable = false)})
-    private List<Student> students;
 
     public int getId() {
         return id;
@@ -111,14 +107,6 @@ public class Course {
 
     public void setPricePerHour(float pricePerHour) {
         this.pricePerHour = pricePerHour;
-    }
-
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
     }
 
     public List<Subscription> getSubscriptionList() {
