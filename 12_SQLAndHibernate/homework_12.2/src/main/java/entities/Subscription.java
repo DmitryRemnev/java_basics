@@ -53,12 +53,10 @@ public class Subscription implements Serializable {
         }
 
         @ManyToOne(fetch = FetchType.LAZY)
-        //@ManyToOne(cascade = CascadeType.ALL)
         @JoinColumn(name = "student_id", foreignKey = @ForeignKey(name = "PERSON_ID_FK_St"))
         private Student student;
 
         @ManyToOne(fetch = FetchType.LAZY)
-        //@ManyToOne(cascade = CascadeType.ALL)
         @JoinColumn(name = "course_id", foreignKey = @ForeignKey(name = "PERSON_ID_FK_Crs"))
         private Course course;
 
