@@ -1,12 +1,11 @@
 package entities;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.*;
 
 @Entity
 @Table(name = "Courses")
-public class Course implements Serializable {
+public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +22,11 @@ public class Course implements Serializable {
     private String description;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "course")
+    @JoinColumn(name = "course_id")
     private List<Subscription> subscriptionList;
 
     @Column(name = "students_count")

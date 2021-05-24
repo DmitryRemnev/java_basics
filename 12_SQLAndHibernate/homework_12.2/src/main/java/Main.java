@@ -14,7 +14,7 @@ public class Main {
                 .configure("hibernate.cfg.xml").build();
         Metadata metadata = new MetadataSources(registry).getMetadataBuilder().build();
 
-        /*try (SessionFactory factory = metadata.getSessionFactoryBuilder().build()) {
+        try (SessionFactory factory = metadata.getSessionFactoryBuilder().build()) {
 
             Session session = factory.openSession();
             Transaction transaction = session.beginTransaction();
@@ -25,6 +25,6 @@ public class Main {
             transaction.commit();
         } catch (Exception exception) {
             exception.printStackTrace();
-        }*/
+        }
     }
 }

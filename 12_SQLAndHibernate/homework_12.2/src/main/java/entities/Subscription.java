@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "Subscriptions")
-public class Subscription implements Serializable {
+public class Subscription {
 
     @EmbeddedId
     private Key id;

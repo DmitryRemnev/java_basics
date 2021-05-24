@@ -18,6 +18,7 @@ public class Teacher {
     private int age;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "teacher_id")
     private List<Course> courseList;
 
     public int getId() {
