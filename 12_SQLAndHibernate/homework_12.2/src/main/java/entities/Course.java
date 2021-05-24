@@ -21,7 +21,7 @@ public class Course {
 
     private String description;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
@@ -30,7 +30,7 @@ public class Course {
     private List<Subscription> subscriptionList;
 
     @Column(name = "students_count")
-    private int studentsCount;
+    private Integer studentsCount;
 
     private int price;
 
