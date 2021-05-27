@@ -17,10 +17,8 @@ public class Main {
 
         if (files != null && files.length > 0) {
 
-            int separation = files.length / numberCores;
-
             for (int i = 0; i < numberCores; i++) {
-                File[] file = new File[separation];
+                File[] file = new File[files.length];
                 System.arraycopy(files, 0, file, 0, file.length);
                 ImageResizer imageResizer = new ImageResizer(file, NEW_WIDTH, DST_FOLDER, start);
                 imageResizer.start();
