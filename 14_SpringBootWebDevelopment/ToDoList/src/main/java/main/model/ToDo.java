@@ -1,18 +1,20 @@
 package main.model;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 public class ToDo {
 
-    private int id;
+    private AtomicLong id;
 
     private String title;
 
     private String description;
 
-    public int getId() {
+    public AtomicLong getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(AtomicLong id) {
         this.id = id;
     }
 

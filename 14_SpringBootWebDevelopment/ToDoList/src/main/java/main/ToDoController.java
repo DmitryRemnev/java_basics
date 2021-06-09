@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 public class ToDoController {
@@ -16,17 +17,17 @@ public class ToDoController {
     }
 
     @PostMapping("/todo/")
-    public int add(ToDo toDo) {
+    public AtomicLong add(ToDo toDo) {
         return Storage.addToDo(toDo);
     }
 
     @DeleteMapping("/todo/{id}")
-    public void delete(@PathVariable int id) {
+    public void delete(@PathVariable AtomicLong id) {
         Storage.deleteToDo(id);
     }
 
     @PutMapping("/todo/{id}")
-    public void update(@PathVariable int id, ToDo toDo) {
+    public void update(@PathVariable AtomicLong id, ToDo toDo) {
         Storage.updateToDo(id, toDo);
     }
 
@@ -36,7 +37,7 @@ public class ToDoController {
     }
 
     @GetMapping("/todo/{id}")
-    public ResponseEntity get(@PathVariable int id) {
+    public ResponseEntity get(@PathVariable AtomicLong id) {
         ToDo toDo = Storage.getToDo(id);
         if (toDo == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
