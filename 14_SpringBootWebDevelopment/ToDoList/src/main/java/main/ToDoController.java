@@ -22,13 +22,13 @@ public class ToDoController {
     }
 
     @DeleteMapping("/todo/{id}")
-    public void delete(@PathVariable AtomicLong id) {
-        Storage.deleteToDo(id);
+    public void delete(@PathVariable long id) {
+        Storage.deleteToDo(new AtomicLong(id));
     }
 
     @PutMapping("/todo/{id}")
-    public void update(@PathVariable AtomicLong id, ToDo toDo) {
-        Storage.updateToDo(id, toDo);
+    public void update(@PathVariable long id, ToDo toDo) {
+        Storage.updateToDo(new AtomicLong(id), toDo);
     }
 
     @DeleteMapping("/todo/")
@@ -37,8 +37,8 @@ public class ToDoController {
     }
 
     @GetMapping("/todo/{id}")
-    public ResponseEntity get(@PathVariable AtomicLong id) {
-        ToDo toDo = Storage.getToDo(id);
+    public ResponseEntity get(@PathVariable long id) {
+        ToDo toDo = Storage.getToDo(new AtomicLong(id));
         if (toDo == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
