@@ -1,17 +1,30 @@
 package main;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import main.model.ToDo;
+import main.model.ToDoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
+import java.util.ArrayList;
 
-@RestController
+@Controller
 public class DefaultController {
 
+    @Autowired
+    ToDoRepository toDoRepository;
+
     @RequestMapping("/")
-    public ResponseEntity<String> index() {
-        return new ResponseEntity<>((new Date()).toString(), HttpStatus.OK);
+    public String index(Model model) {
+        Iterable<ToDo> toDoIterable = toDoRepository.findAll();
+        ArrayList<ToDo> list = new ArrayList<>();
+        for (ToDo toDo : toDoIterable) {
+            list.add(toDo);
+        }
+        model.addAttribute("todo", list);
+        model.addAttribute("todoCount", list.size());
+
+        return "index";
     }
 }
