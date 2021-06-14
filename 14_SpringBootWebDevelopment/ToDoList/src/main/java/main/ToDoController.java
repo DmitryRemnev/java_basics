@@ -1,64 +1,57 @@
 package main;
 
 import main.model.ToDo;
-import main.model.ToDoRepository;
+import main.model.ToDoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
 public class ToDoController {
 
     @Autowired
-    private ToDoRepository toDoRepository;
+    private ToDoService toDoService;
 
     @GetMapping("/todo/")
-    public List<ToDo> list() {
-        Iterable<ToDo> toDoIterable = toDoRepository.findAll();
-
-        ArrayList<ToDo> list = new ArrayList<>();
-        for (ToDo toDo : toDoIterable) {
-            list.add(toDo);
-        }
-
-        return list;
+    public ResponseEntity<Object> list() {
+        return new ResponseEntity<>(toDoService.getList(), HttpStatus.OK);
     }
 
     @PostMapping("/todo/")
-    public Long add(ToDo toDo) {
-        ToDo newToDo = toDoRepository.save(toDo);
-        return newToDo.getId();
+    public ResponseEntity<Object> add(ToDo toDo) {
+        return new ResponseEntity<>(toDoService.addToDo(toDo), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/todo/{id}")
-    public void delete(@PathVariable long id) {
-        toDoRepository.deleteById(id);
+    public ResponseEntity<Object> delete(@PathVariable long id) {
+        toDoService.deleteTodo(id);
+        return new ResponseEntity<>("Is deleted", HttpStatus.OK);
     }
 
     @PutMapping("/todo/{id}")
-    public void update(@PathVariable long id, ToDo toDo) {
-        toDoRepository.save(toDo);
+    public ResponseEntity<Object> update(ToDo toDo) {
+        toDoService.updateToDo(toDo);
+        return new ResponseEntity<>("Is updated", HttpStatus.OK);
     }
 
     @DeleteMapping("/todo/")
-    public void deleteAll() {
-        toDoRepository.deleteAll();
+    public ResponseEntity<Object> deleteAll() {
+        toDoService.deleteAllToDo();
+        return new ResponseEntity<>("Is deleted all", HttpStatus.OK);
     }
 
     @GetMapping("/todo/{id}")
-    public ResponseEntity get(@PathVariable long id) {
+    public ResponseEntity<Object> get(@PathVariable long id) {
 
-        Optional<ToDo> toDoOptional = toDoRepository.findById(id);
+        Optional<ToDo> toDoOptional = toDoService.getToDo(id);
 
         if (!toDoOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
 
-        return new ResponseEntity(toDoOptional.get(), HttpStatus.OK);
+        return new ResponseEntity<>(toDoOptional.get(), HttpStatus.OK);
     }
 }
