@@ -1,5 +1,8 @@
 import au.com.bytecode.opencsv.CSVReader;
+import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.client.ClientSession;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.BsonDocument;
@@ -44,11 +47,11 @@ public class Main {
 
         System.out.println(NUMBER_OF_STUDENTS + collection.countDocuments());
 
-        BsonDocument query = BsonDocument.parse("{Age: {$gt: 40}}");
+        BsonDocument query = BsonDocument.parse("{Age: {$gt: '40'}}");
         System.out.println(OVER_FORTY_YEARS_OLD + collection.countDocuments(query));
 
-        Bson sortASC = ascending("Age");
-        collection.find().sort(sortASC).limit(1).forEach((Consumer<Document>) document -> {
+        Bson sortAsc = ascending("Age");
+        collection.find().sort(sortAsc).limit(1).forEach((Consumer<Document>) document -> {
             System.out.println(YOUNGEST_STUDENT + document.get("Name"));
         });
 
