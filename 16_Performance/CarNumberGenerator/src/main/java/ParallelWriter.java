@@ -1,36 +1,24 @@
 import java.io.FileOutputStream;
+import java.util.List;
 
 public class ParallelWriter implements Runnable {
-    private String name;
-    private String path;
+    private final long start;
+    private final String path;
+    private final List<String> list;
 
-    public ParallelWriter(String name, String path) {
-        this.name = name;
+    public ParallelWriter(long start, String path, List<String> list) {
+        this.start = start;
         this.path = path;
+        this.list = list;
     }
 
     @Override
     public void run() {
-        long start = System.currentTimeMillis();
         try (FileOutputStream writer = new FileOutputStream(path)) {
 
-            char[] letters = {'У', 'К', 'Е', 'Н', 'Х', 'В', 'А', 'Р', 'О', 'С', 'М', 'Т'};
-            StringBuffer carNumber = new StringBuffer();
-            for (int number = 1; number < 1000; number++) {
-                int regionCode = 199;
-                for (char firstLetter : letters) {
-                    for (char secondLetter : letters) {
-                        for (char thirdLetter : letters) {
-                            carNumber.append(firstLetter)
-                                    .append(padNumber(number, 3))
-                                    .append(secondLetter).append(thirdLetter)
-                                    .append(padNumber(regionCode, 2));
-                            writer.write(carNumber.toString().getBytes());
-                            writer.write('\n');
-                            carNumber.setLength(0);
-                        }
-                    }
-                }
+            for (String number : list) {
+                writer.write(number.getBytes());
+                writer.write('\n');
             }
 
             writer.flush();
@@ -38,14 +26,5 @@ public class ParallelWriter implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private static String padNumber(int number, int numberLength) {
-        StringBuilder numberStr = new StringBuilder(Integer.toString(number));
-        int padSize = numberLength - numberStr.length();
-        for (int i = 0; i < padSize; i++) {
-            numberStr.insert(0, '0');
-        }
-        return numberStr.toString();
     }
 }
