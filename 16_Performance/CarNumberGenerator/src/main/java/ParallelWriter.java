@@ -15,19 +15,19 @@ public class ParallelWriter implements Runnable {
         try (FileOutputStream writer = new FileOutputStream(path)) {
 
             char[] letters = {'У', 'К', 'Е', 'Н', 'Х', 'В', 'А', 'Р', 'О', 'С', 'М', 'Т'};
-            StringBuilder carNumber;
+            StringBuffer carNumber = new StringBuffer();
             for (int number = 1; number < 1000; number++) {
                 int regionCode = 199;
                 for (char firstLetter : letters) {
                     for (char secondLetter : letters) {
                         for (char thirdLetter : letters) {
-                            carNumber = new StringBuilder();
                             carNumber.append(firstLetter)
                                     .append(padNumber(number, 3))
                                     .append(secondLetter).append(thirdLetter)
                                     .append(padNumber(regionCode, 2));
                             writer.write(carNumber.toString().getBytes());
                             writer.write('\n');
+                            carNumber.setLength(0);
                         }
                     }
                 }
