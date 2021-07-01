@@ -13,18 +13,19 @@ public class Loader {
 
         List<String> numbers = new ArrayList<>();
         char[] letters = {'У', 'К', 'Е', 'Н', 'Х', 'В', 'А', 'Р', 'О', 'С', 'М', 'Т'};
-        StringBuilder carNumber = new StringBuilder();
+        String carNumber = "";
         for (int number = 1; number < 1000; number++) {
             int regionCode = 199;
             for (char firstLetter : letters) {
                 for (char secondLetter : letters) {
                     for (char thirdLetter : letters) {
-                        carNumber.append(firstLetter)
-                                .append(padNumber(number, 3))
-                                .append(secondLetter).append(thirdLetter)
-                                .append(padNumber(regionCode, 2));
-                        numbers.add(carNumber.toString());
-                        carNumber.setLength(0);
+                        carNumber.concat(String.valueOf(firstLetter))
+                                .concat(padNumber(number, 3))
+                                .concat(String.valueOf(secondLetter))
+                                .concat(String.valueOf(thirdLetter))
+                                .concat(padNumber(regionCode, 2));
+                        numbers.add(carNumber);
+                        carNumber = "";
                     }
                 }
             }
