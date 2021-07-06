@@ -23,7 +23,7 @@ public class Loader {
     public static void main(String[] args) throws Exception {
         //long usage = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
 
-        String fileName = "res/data-1572M.xml";
+        String fileName = "res/data-18M.xml";
 
         /*SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser parser = factory.newSAXParser();
