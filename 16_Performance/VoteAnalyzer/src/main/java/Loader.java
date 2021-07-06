@@ -21,20 +21,23 @@ public class Loader {
     private static HashMap<Voter, Integer> voterCounts = new HashMap<>();
 
     public static void main(String[] args) throws Exception {
-        long usage = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        //long usage = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
 
-        String fileName = "res/data-18M.xml";
+        String fileName = "res/data-1572M.xml";
 
-        SAXParserFactory factory = SAXParserFactory.newInstance();
+        /*SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser parser = factory.newSAXParser();
         XMLHandler handler = new XMLHandler();
         parser.parse(new File(fileName), handler);
-        handler.printDuplicatedVoters();
+        handler.printDuplicatedVoters();*/
 
-        /*parseFile(fileName);
+        long start = System.currentTimeMillis();
+        parseFile(fileName);
+        System.out.println(System.currentTimeMillis() - start);
 
         //Printing results
-        System.out.println("Voting station work times: ");
+        DBConnection.printVoterCounts();
+        /*System.out.println("Voting station work times: ");
         for (Integer votingStation : voteStationWorkTimes.keySet()) {
             WorkTime workTime = voteStationWorkTimes.get(votingStation);
             System.out.println("\t" + votingStation + " - " + workTime);
@@ -48,9 +51,9 @@ public class Loader {
             }
         }*/
 
-        usage = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory() - usage;
+        /*usage = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory() - usage;
         System.out.println(Runtime.getRuntime().totalMemory());
-        System.out.println(usage);
+        System.out.println(usage);*/
     }
 
     private static void parseFile(String fileName) throws Exception {
@@ -59,7 +62,7 @@ public class Loader {
         Document doc = db.parse(new File(fileName));
 
         findEqualVoters(doc);
-        fixWorkTimes(doc);
+        //fixWorkTimes(doc);
     }
 
     private static void findEqualVoters(Document doc) throws Exception {
@@ -70,13 +73,16 @@ public class Loader {
             NamedNodeMap attributes = node.getAttributes();
 
             String name = attributes.getNamedItem("name").getNodeValue();
-            Date birthDay = birthDayFormat
-                    .parse(attributes.getNamedItem("birthDay").getNodeValue());
+            String birthDay = attributes.getNamedItem("birthDay").getNodeValue();
+            //Date birthDay = birthDayFormat.parse(attributes.getNamedItem("birthDay").getNodeValue());
 
-            Voter voter = new Voter(name, birthDay);
+            DBConnection.countVoter(name, birthDay);
+
+            /*Voter voter = new Voter(name, birthDay);
             Integer count = voterCounts.get(voter);
-            voterCounts.put(voter, count == null ? 1 : count + 1);
+            voterCounts.put(voter, count == null ? 1 : count + 1);*/
         }
+        DBConnection.executeMultiInsert();
     }
 
     private static void fixWorkTimes(Document doc) throws Exception {
